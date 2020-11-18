@@ -1,20 +1,18 @@
 import './style.scss';
+import contentCreator from './helpers/contentCreator'
 
 const body = document.querySelector('body')
 
-const form = document.createElement('form')
+const form = contentCreator.withText('form')
 
-const cityInput = document.createElement('input')
-cityInput.type = 'text'
-cityInput.placeholder = 'Enter City Name...'
+const cityInput = contentCreator.withPlaceholder('input', 'text', 'Enter City Name...')
 form.appendChild(cityInput)
 
-const submitBtn = document.createElement('input')
-submitBtn.type = 'submit'
-submitBtn.value = "Check Weather"
+const submitBtn = contentCreator.withValue('input', 'submit', "Check Weather")
 submitBtn.onclick = (e) => {
   e.preventDefault()
   alert(cityInput.value)
+  cityInput.value = ''
 }
 form.appendChild(submitBtn)
 
