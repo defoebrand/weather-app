@@ -33,8 +33,26 @@ const getWeather = async (cityName, key) => {
    const weatherJson = await weatherResult.json()
      console.log(weatherJson)
 //somefunction
-         weatherBox.innerHTML = weatherJson.clouds.all + '% Cloudy'
-         document.body.appendChild(weatherBox)
+        const name = contentCreator.withText('p', `${weatherJson.name}`)
+        weatherBox.appendChild(name)
+        const country = contentCreator.withText('p', `${weatherJson.sys.country}`)
+        weatherBox.appendChild(country)
+        // const dateTime = contentCreator.withText('p', `${weatherJson.dt}`)
+        // weatherBox.appendChild(dateTime)
+        const feels_like = contentCreator.withText('p', `Feels like ${weatherJson.main.feels_like}deg C`)
+        weatherBox.appendChild(feels_like)
+        const actual = contentCreator.withText('p', `Actually ${weatherJson.main.temp}deg C`)
+        weatherBox.appendChild(actual)
+        const humidity = contentCreator.withText('p', `${weatherJson.main.humidity}% Humidity`)
+        weatherBox.appendChild(humidity)
+        const clouds = contentCreator.withText('p', `${weatherJson.clouds.all}% Cloudy`)
+        weatherBox.appendChild(clouds)
+        const description = contentCreator.withText('p', `${weatherJson.weather[0].description}`)
+        weatherBox.appendChild(description)
+        const windSpeed = contentCreator.withText('p', `${weatherJson.wind.speed}kph?`)
+        weatherBox.appendChild(windSpeed)
+        const windDeg = contentCreator.withText('p', `${weatherJson.wind.deg}deg`)
+        weatherBox.appendChild(windDeg)
 //endfunction
  } catch(err) {
       console.log(err)
