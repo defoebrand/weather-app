@@ -1,4 +1,4 @@
-import capFirst from './capFirst';
+import {capFirst} from './helpers';
 
 const contentCreator = {
 
