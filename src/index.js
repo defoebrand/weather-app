@@ -33,8 +33,7 @@ submitBtn.onclick = (e) => {
   e.preventDefault()
   clearContent(weatherBox)
   const before = Date.now();
-  // alert(document.querySelector('radio'))
-  getWeather(cityInput.value, weatherBox, unit).then(() => {
+  getWeather(cityInput.value, weatherBox).then(() => {
     const after = Date.now();
     printTime.textContent = `Your request took ${((after - before)/1000)} seconds to complete`
   });
@@ -47,43 +46,11 @@ form.appendChild(unitF)
 const unitC = contentCreator.withLabel('input', 'radio', 'C', 'radio', 'C', 'unit')
 form.appendChild(unitC)
 
-// const radioF = document.querySelector('#F')
-// radioF.checked = true
-
-
-// radioF.onchange = () => {
-//   alert('hello')
-// }
-
-// radioF.onchange = () => {
-//   alert('hello')
-//   // chooseUnit()
-// }
-
-
 body.appendChild(form)
 
-const unit = 'metric'
-
-if(localStorage['radioC'] == undefined){
-  localStorage['radioC'] = true
-}
-
 const radioC = document.getElementById('C')
-radioC.checked = localStorage['radioC']
-radioC.onclick = () => {
-  localStorage['radioC'] = true
-  localStorage['radioF'] = false
-  unit = 'metric'
-}
+radioC.checked = true
 
-const radioF = document.getElementById('F')
-radioF.checked = localStorage['radioF']
-radioF.onclick = () => {
-  localStorage['radioF'] = true
-  localStorage['radioC'] = false
-  unit = 'imperial'
-}
 getWeather('vilnius', weatherBox)
 
 body.appendChild(weatherBox);
