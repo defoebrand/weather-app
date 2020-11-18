@@ -12,4 +12,4 @@
   };
 
 
-export { capFirst, clearContent };
+export { clearContent, capFirst };

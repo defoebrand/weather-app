@@ -28,6 +28,29 @@ const contentCreator = {
     return element;
   },
 
+  withHTML(type, content, className) {
+    const element = document.createElement(type);
+    element.innerHTML = content;
+    element.classList.add(className);
+
+    return element;
+  },
+
+  withLabel(type, format, placeholder, className, labelFor, name) {
+    const element = document.createElement(type);
+    element.type = format;
+    element.name = name;
+    element.placeholder = placeholder;
+    element.classList.add(className);
+    element.id = labelFor;
+    const label = document.createElement('label');
+    label.textContent = capFirst(labelFor);
+    label.for = labelFor;
+    label.appendChild(element);
+
+    return label;
+  },
+
   // withValueID(type, content, value, className) {
   //   const element = document.createElement(type);
   //   element.textContent = content;
@@ -68,19 +91,6 @@ const contentCreator = {
   //   return element;
   // },
   //
-  // withLabel(type, format, placeholder, className, labelFor) {
-  //   const element = document.createElement(type);
-  //   element.type = format;
-  //   element.placeholder = placeholder;
-  //   element.classList.add(className);
-  //   element.id = labelFor;
-  //   const label = document.createElement('label');
-  //   label.textContent = capFirst(labelFor);
-  //   label.for = labelFor;
-  //   label.appendChild(element);
-  //
-  //   return label;
-  // },
 };
 
 export default contentCreator;

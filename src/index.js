@@ -1,70 +1,91 @@
 import headerBackground from './assets/atmosphere-earth.jpeg';
 import './style.scss';
 import contentCreator from './helpers/contentCreator'
-import {clearContent, capFirst} from './helpers/helpers'
+import {clearContent } from './helpers/helpers'
+import { getWeather, chooseUnit } from './helpers/display'
+// import jquery from "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
+// import locations from "http://lab.iamrohit.in/js/location.js"
 
-const key = 'c718936db7e8ffb4daa086761e71f389'
+//token MXEjbMzVZQcrWZBkdrvjD50I6mJ0IAfCHA8EIv04qOx4-W_OrKdzs7hjryGMXX1BKuM
+//for https://www.universal-tutorial.com/rest-apis/free-rest-api-for-country-state-city
+
+// const key = 'c718936db7e8ffb4daa086761e71f389'
 
 const body = document.querySelector('body')
 
 const header = contentCreator.withText('img', '', 'header')
-header.style.backgroundImage = headerBackground
+// header.style.backgroundImage = headerBackground
 header.src = headerBackground
-// header.style.backgroundImage = "url('./assets/atmosphere-earth.jpeg')"
 body.appendChild(header)
-
 
 const form = contentCreator.withText('form')
 
-const weatherBox = contentCreator.withText('div', '', 'weatherBox')
 const cityInput = contentCreator.withPlaceholder('input', 'text', 'Enter City Name...')
 cityInput.autofocus = true
 form.appendChild(cityInput)
 
-const submitBtn = contentCreator.withValue('input', 'submit', "Check Weather")
+const weatherBox = contentCreator.withText('div', '', 'weatherBox')
+
+const printTime = contentCreator.withText('p')
+
+const submitBtn = contentCreator.withValue('input', 'submit', "Check Weather", 'submit')
 submitBtn.onclick = (e) => {
   e.preventDefault()
   clearContent(weatherBox)
-  getWeather(cityInput.value, key, weatherBox)
+  const before = Date.now();
+  // alert(document.querySelector('radio'))
+  getWeather(cityInput.value, weatherBox, unit).then(() => {
+    const after = Date.now();
+    printTime.textContent = `Your request took ${((after - before)/1000)} seconds to complete`
+  });
   cityInput.value = ''
 }
 form.appendChild(submitBtn)
 
+const unitF = contentCreator.withLabel('input', 'radio', 'F', 'radio', 'F', 'unit')
+form.appendChild(unitF)
+const unitC = contentCreator.withLabel('input', 'radio', 'C', 'radio', 'C', 'unit')
+form.appendChild(unitC)
+
+// const radioF = document.querySelector('#F')
+// radioF.checked = true
+
+
+// radioF.onchange = () => {
+//   alert('hello')
+// }
+
+// radioF.onchange = () => {
+//   alert('hello')
+//   // chooseUnit()
+// }
+
+
 body.appendChild(form)
+
+const unit = 'metric'
+
+if(localStorage['radioC'] == undefined){
+  localStorage['radioC'] = true
+}
+
+const radioC = document.getElementById('C')
+radioC.checked = localStorage['radioC']
+radioC.onclick = () => {
+  localStorage['radioC'] = true
+  localStorage['radioF'] = false
+  unit = 'metric'
+}
+
+const radioF = document.getElementById('F')
+radioF.checked = localStorage['radioF']
+radioF.onclick = () => {
+  localStorage['radioF'] = true
+  localStorage['radioC'] = false
+  unit = 'imperial'
+}
+getWeather('vilnius', weatherBox)
 
 body.appendChild(weatherBox);
 
-const getWeather = async (cityName, key, weatherBox) => {
- try {
-   const weatherResult = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${key}&units=metric`, { mode: 'cors'});
-   const weatherJson = await weatherResult.json()
-     console.log(weatherJson)
-//somefunction
-        const name = contentCreator.withText('p', `${weatherJson.name}`, 'name')
-        weatherBox.appendChild(name)
-        const country = contentCreator.withText('p', `${weatherJson.sys.country}`, 'country')
-        weatherBox.appendChild(country)
-        // const dateTime = contentCreator.withText('p', `${weatherJson.dt}`, 'dateTime')
-        // weatherBox.appendChild(dateTime)
-        const feels_like = contentCreator.withText('p', `Feels like ${weatherJson.main.feels_like}deg C`, 'feels_like')
-        weatherBox.appendChild(feels_like)
-        const actual = contentCreator.withText('p', `Actual Temp ${weatherJson.main.temp}deg C`, 'actual_temp')
-        weatherBox.appendChild(actual)
-        // const humidity = contentCreator.withText('p', `${weatherJson.main.humidity}% Humidity`, 'humidity')
-        // weatherBox.appendChild(humidity)
-        const clouds = contentCreator.withText('p', `${weatherJson.clouds.all}% Cloudy`, 'cloudy')
-        weatherBox.appendChild(clouds)
-        const description = contentCreator.withText('p', `${capFirst(weatherJson.weather[0].description)}`, 'description')
-        weatherBox.appendChild(description)
-        const windSpeed = contentCreator.withText('p', `${weatherJson.wind.speed}kph?`, 'windSpeed')
-        weatherBox.appendChild(windSpeed)
-        const windDeg = contentCreator.withText('p', `${weatherJson.wind.deg}deg`, 'windDeg')
-        weatherBox.appendChild(windDeg)
-//endfunction
- } catch(err) {
-      console.log(err)
-    }
-  // return weatherBox
-}
-
-getWeather('vilnius', key, weatherBox)
+body.appendChild(printTime);
