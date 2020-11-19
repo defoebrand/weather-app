@@ -1,7 +1,10 @@
 import headerBackground from './assets/atmosphere-earth.jpeg';
 import './style.scss';
 import contentCreator from './helpers/contentCreator'
-import { getWeather, runSearch } from './helpers/display'
+import {
+  getWeather,
+  runSearch
+} from './helpers/display'
 
 const body = document.querySelector('body')
 

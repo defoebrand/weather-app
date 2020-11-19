@@ -10,10 +10,9 @@ module.exports = {
   },
   plugins: [new HtmlWebpackPlugin()],
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.s?[ac]ss$/i,
-        use: ["style-loader", "css-loader", "sass-loader",],
+        use: ["style-loader", "css-loader", "sass-loader", ],
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
@@ -22,12 +21,17 @@ module.exports = {
           {
             loader: 'image-webpack-loader',
             options: {
-              bypassOnDebug: true, // webpack@1.x
-              disable: true, // webpack@2.x and newer
+              bypassOnDebug: true,
+              disable: true,
             },
           },
         ],
       },
     ],
   },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 3000
+  }
 };
