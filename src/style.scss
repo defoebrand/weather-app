@@ -1,0 +1,53 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  text-align: center;
+}
+
+label {
+  white-space: nowrap;
+}
+
+.header {
+  width: 100vw;
+  height: 12.5vh;
+  background-size: cover;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.weatherBox {
+  margin: 15px;
+  display: grid;
+  width: 75vw;
+  min-width: 350px;
+  max-width: 750px;
+  grid-template-columns: repeat(3, 30%);
+  grid-template-rows: repeat(4, 75px);
+  justify-content: space-around;
+  align-content: space-around;
+  grid-gap: 5px;
+  text-align: center;
+  white-space: nowrap;
+
+  .cityName {
+    font-weight: bold;
+  }
+
+  .description {
+    white-space: normal;
+  }
+}
+
+.radio {
+  margin-right: 10px;
+}
+
+.submit {
+  margin-right: 15px;
+}
