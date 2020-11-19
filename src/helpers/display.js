@@ -51,7 +51,7 @@ const getWeather = async (cityName) => {
   const errors = document.querySelector('.errors');
   try {
     const weatherResult = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=c718936db7e8ffb4daa086761e71f389&units=${unit}`, {
-      mode: 'cors'
+      mode: 'cors',
     });
     const weatherJson = await weatherResult.json();
     errors.textContent = '';
