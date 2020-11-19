@@ -37,6 +37,8 @@ The project is a simple weather app designed to find various features of weather
 
 ## Deployed on:
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3a4c88ef-2e01-460f-b41d-ced27019c533/deploy-status)](https://app.netlify.com/sites/nervous-goldwasser-3d222e/deploys)
+
 ## Prerequisities
 
 To get this project up and running locally, you must have node and npm installed on your computer.
