@@ -9,10 +9,13 @@ form {
   text-align: center;
 }
 
+label {
+  white-space: nowrap;
+}
+
 .header {
   width: 100vw;
   height: 12.5vh;
-  // border: 1px solid black;
   background-size: cover;
   margin-top: -10px;
   margin-bottom: 10px;
@@ -21,27 +24,24 @@ form {
 .weatherBox {
   margin: 15px;
   display: grid;
-  grid-template-columns: repeat(3, 28%);
-  grid-template-rows: auto;
+  width: 75vw;
+  min-width: 350px;
+  max-width: 750px;
+  grid-template-columns: repeat(3, 30%);
+  grid-template-rows: repeat(4, 75px);
   justify-content: space-around;
   align-content: space-around;
   grid-gap: 5px;
-  // border: 1px solid black;
   text-align: center;
+  white-space: nowrap;
 
-  .name {
+  .cityName {
     font-weight: bold;
   }
-  .country{}
-  .dateTime{}
-  .feels_like{}
-  .actual_temp{}
-  .humidity{}
-  .cloudy{}
 
-  .description { }
-  .windSpeed{}
-  .windDeg{}
+  .description {
+    white-space: normal;
+  }
 }
 
 .radio {
