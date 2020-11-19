@@ -12,7 +12,7 @@ module.exports = {
   module: {
     rules: [{
         test: /\.s?[ac]ss$/i,
-        use: ["style-loader", "css-loader", "sass-loader", ],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
@@ -32,6 +32,6 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    port: 3000
-  }
+    port: 3000,
+  },
 };

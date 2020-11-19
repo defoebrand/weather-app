@@ -10,7 +10,7 @@ const contentCreator = {
 
   withPlaceholder(type, format, content, className) {
     const element = document.createElement(type);
-    element.type = format
+    element.type = format;
     element.placeholder = content;
     element.classList.add(className);
 
@@ -19,7 +19,7 @@ const contentCreator = {
 
   withValue(type, format, value, className) {
     const element = document.createElement(type);
-    element.type = format
+    element.type = format;
     element.value = value;
     element.classList.add(className);
 

@@ -13,5 +13,5 @@ const clearContent = (content) => {
 
 export {
   clearContent,
-  capFirst
+  capFirst,
 };
